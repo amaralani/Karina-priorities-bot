@@ -1,3 +1,6 @@
+const Telegraf = require("telegraf/markup");
+const { Markup } = Telegraf;
+
 module.exports = {
     begin: function (ctx) {
         const inlineMessageKeyboard = Markup.inlineKeyboard([
