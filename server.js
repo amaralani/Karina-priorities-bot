@@ -8,7 +8,7 @@ console.log(Markup);
 const bot = new Telegraf(process.env.BOT_TOKEN);
 bot.start((ctx) => ctx.reply('Welcome'));
 bot.help((ctx) => ctx.reply('Send me a sticker'));
-bot.on('callback_query', (ctx) => react(ctx,ctx.callbackQuery.data));
+bot.on('callback_query', (ctx) => {react(ctx,ctx.callbackQuery.data);});
 
 bot.on('message', (ctx) => {
     react(ctx,ctx.message);
@@ -24,14 +24,14 @@ function begin(ctx) {
         // {text: 'بله', callback_data: 'main-function'},
         // {text: , callback_data: 'low'}
     ]).extra();
-    ctx.telegram.sendMessage(ctx.from.id, "آیا کار مورد نظر جزء عملکردهای اصلی شرکت است؟",inlineMessageKeyboard);
+    ctx.reply(ctx.from.id, "آیا کار مورد نظر جزء عملکردهای اصلی شرکت است؟",inlineMessageKeyboard);
 }
 function askForCoupling(ctx) {
     const inlineMessageKeyboard = Markup.inlineKeyboard([
         {text: 'بله', callback_data: 'has-coupling'},
         {text: 'خیر', callback_data: 'medium'}
     ]).extra();
-    ctx.telegram.sendMessage(ctx.from.id, "آیا برروی موارد دیگر تاثیر میگذارد؟", inlineMessageKeyboard);
+    ctx.reply("آیا برروی موارد دیگر تاثیر میگذارد؟", inlineMessageKeyboard);
 }
 
 function askForDeadline(ctx) {
