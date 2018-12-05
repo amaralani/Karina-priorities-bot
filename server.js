@@ -49,7 +49,7 @@ function askForDeadline(ctx) {
 function askForSeverFault(ctx) {
     const inlineMessageKeyboard = Markup.inlineKeyboard([
         {text: 'بله', callback_data: 'blocker'},
-        {text: 'خیر', callback_data: 'high'}
+        {text: 'خیر', callback_data: 'highest'}
     ]).extra();
     ctx.telegram.sendMessage(ctx.from.id, "آیا باعث مختل شدن کار کاربر می‌ شود؟", inlineMessageKeyboard);
 }
