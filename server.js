@@ -8,10 +8,10 @@ console.log(Markup);
 const bot = new Telegraf(process.env.BOT_TOKEN);
 bot.start((ctx) => ctx.reply('Welcome'));
 bot.help((ctx) => ctx.reply("لطفا جهت شروع مجدد عبارت \"new\" یا \"جدید\" را وارد کنید."));
-bot.on('callback_query', (ctx,next) => {react(ctx,ctx.callbackQuery.data);ctx.answerCbQuery().then()});
+bot.on('callback_query', (ctx) => {react(ctx,ctx.callbackQuery.data);ctx.answerCbQuery().then()});
 
 bot.on('message', (ctx) => {
-    if(ctx.message === "new" || ctx.message ==="جدید"){
+    if(ctx.message.text.toLocaleLowerCase() === "new" || ctx.message.text ==="جدید"){
         begin(ctx);
     }else {
         ctx.reply("لطفا جهت شروع مجدد عبارت \"new\" یا \"جدید\" را وارد کنید.")
