@@ -5,6 +5,9 @@ const bot = new Telegraf(process.env.BOT_TOKEN);
 bot.start((ctx) => ctx.reply('Welcome'));
 bot.help((ctx) => ctx.reply('Send me a sticker'));
 bot.on('sticker', (ctx) => ctx.reply('👍'));
+bot.on("chosen_inline_result",ctx => {
+
+});
 bot.on('message', (ctx) => {
     switch (ctx.message) {
         case "low" :
@@ -42,31 +45,33 @@ bot.startPolling();
 
 function begin(ctx) {
     const inlineMessageKeyboard = Markup.inlineKeyboard([
-        {text: 'بله👍', callback_data: 'main-function'},
-        {text: 'خیر👎', callback_data: 'low'}
+        Markup.callbackButton('بله','main-function'),
+        Markup.callbackButton('خیر','low')
+        // {text: 'بله', callback_data: 'main-function'},
+        // {text: , callback_data: 'low'}
     ]).extra();
     ctx.telegram.sendMessage(ctx.from.id, "آیا کار مورد نظر جزء عملکردهای اصلی شرکت است؟",inlineMessageKeyboard);
 }
 function askForCoupling(ctx) {
     const inlineMessageKeyboard = Markup.inlineKeyboard([
-        {text: 'بله👍', callback_data: 'has-coupling'},
-        {text: 'خیر👎', callback_data: 'medium'}
+        {text: 'بله', callback_data: 'has-coupling'},
+        {text: 'خیر', callback_data: 'medium'}
     ]).extra();
     ctx.telegram.sendMessage(ctx.from.id, "آیا برروی موارد دیگر تاثیر میگذارد؟", inlineMessageKeyboard);
 }
 
 function askForDeadline(ctx) {
     const inlineMessageKeyboard = Markup.inlineKeyboard([
-        {text: 'بله👍', callback_data: 'affects-deadline'},
-        {text: 'خیر👎', callback_data: 'high'}
+        {text: 'بله', callback_data: 'affects-deadline'},
+        {text: 'خیر', callback_data: 'high'}
     ]).extra();
     ctx.telegram.sendMessage(ctx.from.id, "آیا  باعث نرسیدن به مهلت سررسید می شود؟", inlineMessageKeyboard);
 }
 
 function askForSeverFault(ctx) {
     const inlineMessageKeyboard = Markup.inlineKeyboard([
-        {text: 'بله👍', callback_data: 'blocker'},
-        {text: 'خیر👎', callback_data: 'high'}
+        {text: 'بله', callback_data: 'blocker'},
+        {text: 'خیر', callback_data: 'high'}
     ]).extra();
     ctx.telegram.sendMessage(ctx.from.id, "آیا باعث مختل شدن کار کاربر می‌ شود؟", inlineMessageKeyboard);
 }
