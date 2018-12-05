@@ -8,7 +8,7 @@ console.log(Markup);
 const bot = new Telegraf(process.env.BOT_TOKEN);
 bot.start((ctx) => ctx.reply('Welcome'));
 bot.help((ctx) => ctx.reply('Send me a sticker'));
-bot.on('callback_query', (ctx) => {react(ctx,ctx.callbackQuery.data);});
+bot.on('callback_query', (ctx,next) => {react(ctx,ctx.callbackQuery.data);next(ctx).then(()=>console.log("done?"))});
 
 bot.on('message', (ctx) => {
     react(ctx,ctx.message);
