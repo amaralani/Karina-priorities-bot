@@ -5,9 +5,35 @@ const bot = new Telegraf(process.env.BOT_TOKEN);
 bot.start((ctx) => ctx.reply('Welcome'));
 bot.help((ctx) => ctx.reply('Send me a sticker'));
 bot.on('sticker', (ctx) => ctx.reply('👍'));
-bot.on("chosen_inline_result",ctx => {
-
+bot.action("low",ctx => {
+    ctx.reply("low");
 });
+bot.action("medium",ctx => {
+    ctx.reply("medium");
+});
+bot.action("high",ctx => {
+    ctx.reply("high");
+});
+
+bot.action("highest",ctx => {
+    ctx.reply("highest");
+});
+bot.action("blocker",ctx => {
+    ctx.reply("blocker");
+});
+bot.action("is-main-function",ctx => {
+    ctx.reply("Medium");
+});
+bot.action("main-function",ctx => {
+    askForCoupling(ctx);
+});
+bot.action("has-coupling",ctx => {
+    askForDeadline(ctx);
+});
+bot.action("affects-deadline",ctx => {
+    askForSeverFault(ctx);
+});
+
 bot.on('message', (ctx) => {
     switch (ctx.message) {
         case "low" :
