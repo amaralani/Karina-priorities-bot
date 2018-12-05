@@ -1,5 +1,6 @@
 const Telegraf = require('telegraf');
 var service = require("./api/services/botService")
+console.log(process.env.BOT_TOKEN);
 const bot = new Telegraf(process.env.BOT_TOKEN);
 bot.start((ctx) => ctx.reply('Welcome'));
 bot.help((ctx) => ctx.reply('Send me a sticker'));
