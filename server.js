@@ -24,7 +24,7 @@ function begin(ctx) {
         // {text: 'بله', callback_data: 'main-function'},
         // {text: , callback_data: 'low'}
     ]).extra();
-    ctx.reply(ctx.from.id, "آیا کار مورد نظر جزء عملکردهای اصلی شرکت است؟",inlineMessageKeyboard);
+    ctx.reply("آیا کار مورد نظر جزء عملکردهای اصلی شرکت است؟",inlineMessageKeyboard);
 }
 function askForCoupling(ctx) {
     const inlineMessageKeyboard = Markup.inlineKeyboard([
