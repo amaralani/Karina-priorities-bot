@@ -1,3 +1,7 @@
+const express = require('express')
+const app = express();
+const port = 8088;
+
 const Telegraf = require('telegraf');
 const { Markup } = Telegraf;
 console.log(Markup);
@@ -5,33 +9,42 @@ const bot = new Telegraf(process.env.BOT_TOKEN);
 bot.start((ctx) => ctx.reply('Welcome'));
 bot.help((ctx) => ctx.reply('Send me a sticker'));
 bot.on('sticker', (ctx) => ctx.reply('👍'));
-bot.action("low",ctx => {
+bot.action("low",(ctx, next) =>{
     ctx.reply("low");
+    return next(ctx).then();
 });
-bot.action("medium",ctx => {
+bot.action("medium",(ctx, next) =>{
     ctx.reply("medium");
+    return next(ctx).then();
 });
-bot.action("high",ctx => {
+bot.action("high",(ctx, next) =>{
     ctx.reply("high");
+    return next(ctx).then();
 });
 
-bot.action("highest",ctx => {
+bot.action("highest",(ctx, next) =>{
     ctx.reply("highest");
+    return next(ctx).then();
 });
-bot.action("blocker",ctx => {
+bot.action("blocker",(ctx, next) =>{
     ctx.reply("blocker");
+    return next(ctx).then();
 });
-bot.action("is-main-function",ctx => {
+bot.action("is-main-function",(ctx, next) =>{
     ctx.reply("Medium");
+    return next(ctx).then();
 });
-bot.action("main-function",ctx => {
+bot.action("main-function",(ctx, next) =>{
     askForCoupling(ctx);
+    return next(ctx).then();
 });
-bot.action("has-coupling",ctx => {
+bot.action("has-coupling",(ctx, next) =>{
     askForDeadline(ctx);
+    return next(ctx).then();
 });
-bot.action("affects-deadline",ctx => {
+bot.action("affects-deadline",(ctx, next) =>{
     askForSeverFault(ctx);
+    return next(ctx).then();
 });
 
 bot.on('message', (ctx) => {
@@ -68,6 +81,8 @@ bot.on('message', (ctx) => {
     }
 });
 bot.startPolling();
+
+app.listen(port, () => console.log(`app listening on port ${port}!`))
 
 function begin(ctx) {
     const inlineMessageKeyboard = Markup.inlineKeyboard([
